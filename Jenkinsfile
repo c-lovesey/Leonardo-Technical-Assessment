@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     stages {
-        stage('build') {
+        stage('compile') {
             steps {
-                echo 'Hello World'
+                sh 'g++ -o Hello-World Hello-World.cpp'
             }
         }
     }

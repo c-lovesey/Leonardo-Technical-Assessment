@@ -4,6 +4,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                sh 'make --version'
+                sg 'g++ --version'
                 sh 'echo "Building..."'
                 sh 'chmod +x scripts/Linux-Build.sh'
                 sh 'scripts/Linux-Build.sh'

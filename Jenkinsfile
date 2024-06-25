@@ -1,20 +1,34 @@
 pipeline {
     agent any
 
+    environment {
+        BUILD_DIR = 'build'
+        BIN_DIR = "${BUILD_DIR}/bin"
+        SRC_DIR = 'HelloWorld/src'
+        EXECUTABLE = 'HelloWorld'
+    }
+
     stages {
-        
         stage('Build') {
-            steps {     
-                sh 'make --version'
-                sg 'g++ --version'
-                sh 'echo "Building..."'
-                sh 'g++ HelloWorld.cpp -o HelloWorld'
+            steps {
+                echo 'Building the C++ project...'
+                sh '''
+                    mkdir -p ${BUILD_DIR}
+                    mkdir -p ${BIN_DIR}
+                    g++ -o ${BIN_DIR}/${EXECUTABLE} ${SRC_DIR}/*.cpp
+                '''
+            }
+            post {
+                success {
+                    archiveArtifacts artifacts: "${BIN_DIR}/${EXECUTABLE}", fingerprint: true
+                }
             }
         }
-        stage('Test'){
+
+        stage('Test') {
             steps {
-                sh 'echo "Running..."'
-                sh 'HelloWorld'
+                echo 'Running the executable...'
+                sh "${BIN_DIR}/${EXECUTABLE}"
             }
         }
     }

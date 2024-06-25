@@ -2,8 +2,11 @@ pipeline {
     agent any
 
     stages {
+        
         stage('Build') {
-            steps {              
+            steps {     
+                sh 'make --version'
+                sg 'g++ --version'
                 sh 'echo "Building..."'
                 sh 'g++ HelloWorld.cpp -o HelloWorld'
             }

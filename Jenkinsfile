@@ -5,20 +5,16 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-				echo 'Compiling the C++ program...'
-				dir('HelloWorld/src') {
-					sh 'g++ -o HelloWorld HelloWorld\src\HelloWorld.cpp'
-				}
+                echo 'Compiling the C++ program...'
+                sh 'g++ -o HelloWorld HelloWorld/src/HelloWorld.cpp'
             }
         }
 
         stage('Test') {
             steps {
                 echo 'Running the program...'
-                dir('HelloWorld/src') {
-                    sh './HelloWorld'
-				}
-			}
+                sh './HelloWorld'
+            }
         }
 		stage('Archive') {
             steps {

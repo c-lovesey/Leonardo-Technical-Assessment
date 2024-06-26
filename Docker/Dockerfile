@@ -19,6 +19,3 @@ WORKDIR /var/jenkins_home
 
 # Switch to the Jenkins user
 USER jenkins
-
-# Default command to keep the container running
-CMD ["sleep", "infinity"]

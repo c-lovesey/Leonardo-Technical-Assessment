@@ -1,10 +1,6 @@
 pipeline {
-    agent {
-        docker {
-            image 'cpp-jenkins:latest'
-            args '-u root:root' // Run as root to avoid permission issues
-        }
-    }
+	agent any
+    
 
     stages {
         stage('Build') {

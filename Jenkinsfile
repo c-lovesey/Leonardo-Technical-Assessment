@@ -20,7 +20,7 @@ pipeline {
 		stage('Archive') {
             steps {
                 echo 'Archiving the artifacts...'
-                archiveArtifacts artifacts: 'HelloWorld', allowEmptyArchive: true
+                archiveArtifacts artifacts: 'HelloWorld/src/HelloWorld', allowEmptyArchive: true
             }
 		}
     }

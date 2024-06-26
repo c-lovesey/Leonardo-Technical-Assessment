@@ -1,9 +1,24 @@
-# Dockerfile
-FROM jenkins/jenkins:lts
+# Use an official Ubuntu as a parent image
+FROM ubuntu:latest
 
-USER root
+# Set environment variables
+ENV DEBIAN_FRONTEND=noninteractive
 
+# Install required packages
 RUN apt-get update && \
-    apt-get install -y make g++
+    apt-get install -y build-essential g++ && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
+# Create a directory for the Jenkins user
+RUN mkdir -p /var/jenkins_home
+RUN useradd -d /var/jenkins_home -u 1000 -m -s /bin/bash jenkins
+
+# Set the working directory
+WORKDIR /var/jenkins_home
+
+# Switch to the Jenkins user
 USER jenkins
+
+# Default command to keep the container running
+CMD ["sleep", "infinity"]

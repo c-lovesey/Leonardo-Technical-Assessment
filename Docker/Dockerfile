@@ -12,7 +12,7 @@ RUN apt-get update && \
 
 # Create a directory for the Jenkins user
 RUN mkdir -p /var/jenkins_home
-RUN useradd -d /var/jenkins_home -u 1000 -m -s /bin/bash jenkins
+RUN useradd -m -d /var/jenkins_home -s /bin/bash jenkins
 
 # Set the working directory
 WORKDIR /var/jenkins_home

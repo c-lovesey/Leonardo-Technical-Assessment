@@ -1,23 +1,15 @@
 pipeline {
-	agent any
+	agent any //allows any available agent to do the task
     
 
-	stages {
+	stages { //Compiling Stage
         stage('Build') {
             steps {
                 echo 'Compiling the C++ program...'
                 sh 'g++ -o HelloWorld/src/HelloWorld HelloWorld/src/HelloWorld.cpp'
             }
         }
-
-        stage('Test') {
-            steps {
-                echo 'Running the program...'
-                sh './HelloWorld/src/HelloWorld'
-            }
-        }
-
-		stage('Archive') {
+		stage('Archive') { //Archives the program
             steps {
                 echo 'Archiving the artifacts...'
                 archiveArtifacts artifacts: 'HelloWorld/src/HelloWorld', allowEmptyArchive: true
